@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import ReactDOM from "react-dom/client"; // הוספנו לצורך חיבור ל-HTML
 
 const features = [
   { icon: "⚡", title: "ניתוח בשניות", desc: "הכנס טיקר — קבל תמונה מלאה של המניה תוך שניות. לא עוד שעות של מחקר." },
@@ -117,7 +118,6 @@ function LiveTicker() {
   );
 }
 
-// Animated product demo
 function ProductDemo() {
   const [step, setStep] = useState(0);
   const [typed, setTyped] = useState("");
@@ -147,7 +147,6 @@ function ProductDemo() {
 
   return (
     <div style={{ maxWidth:"480px", margin:"0 auto", background:"#0a0e1a", border:"1px solid #1e2d4a", borderTop:"2px solid #c8972a" }}>
-      {/* Browser bar */}
       <div style={{ background:"#06080f", padding:"10px 16px", display:"flex", alignItems:"center", gap:"8px", borderBottom:"1px solid #1e2d4a" }}>
         <div style={{ display:"flex", gap:"5px" }}>
           {["#f87171","#fbbf24","#4ade80"].map((c,i) => <div key={i} style={{ width:"8px", height:"8px", borderRadius:"50%", background:c }} />)}
@@ -156,7 +155,6 @@ function ProductDemo() {
           analist.co.il
         </div>
       </div>
-      {/* App UI */}
       <div style={{ padding:"24px", direction:"rtl" }}>
         <div style={{ fontSize:"11px", letterSpacing:"3px", color:"#c8972a", marginBottom:"12px", textAlign:"right" }}>הכנס טיקר לניתוח</div>
         <div style={{ display:"flex", gap:"8px", marginBottom:"20px" }}>
@@ -221,7 +219,6 @@ export default function LandingPage() {
   useEffect(() => {
     setTimeout(() => setVisible(true), 100);
     const t = setInterval(() => setTickerIdx(i => (i+1) % tickers.length), 1800);
-    // Simulate spots decreasing
     const spotsTimer = setInterval(() => {
       setSpotsLeft(s => s > 3 ? s - 1 : s);
     }, 45000);
@@ -370,7 +367,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* TRUSTED */}
       <div className="trusted-section">
         <div className="trusted-label">מניות שניתחנו</div>
         <div className="trusted-logos">
@@ -378,13 +374,11 @@ export default function LandingPage() {
         </div>
       </div>
 
-      {/* PRODUCT DEMO */}
       <section className="demo-section">
         <div className="section-label">ראה את זה בפעולה</div>
         <ProductDemo />
       </section>
 
-      {/* FEATURES */}
       <section style={{background:'var(--cream)',padding:'100px 20px'}}>
         <div style={{maxWidth:'860px',margin:'0 auto'}}>
           <h2 className="section-title">למה <span>אנליסט?</span></h2>
@@ -400,7 +394,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
       <section className="testimonials">
         <h2 className="section-title" style={{color:'#fff',marginBottom:'56px'}}>מה <span style={{color:'var(--gold-light)',fontStyle:'italic'}}>אומרים</span> המשתמשים</h2>
         <div className="testi-grid">
@@ -414,7 +407,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* FAQ */}
       <section className="faq-section">
         <div style={{maxWidth:'640px',margin:'0 auto'}}>
           <h2 className="section-title">שאלות <span>נפוצות</span></h2>
@@ -422,7 +414,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* FINAL CTA */}
       <section className="final-cta" id="final-cta">
         <p style={{fontSize:'10px',letterSpacing:'4px',color:'var(--gold)',textTransform:'uppercase',marginBottom:'24px'}}>מבצע השקה</p>
         <div className="price-badge"><sup>₪</sup>19</div>
@@ -449,4 +440,11 @@ export default function LandingPage() {
       </footer>
     </div>
   );
+}
+
+// שורות החיבור לקובץ ה-HTML הראשי של השרת
+const rootElement = document.getElementById("root");
+if (rootElement) {
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(<LandingPage />);
 }
